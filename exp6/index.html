@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search XML Elements</title>
+    <script>
+        function readXMLData() {
+            var xmlDocumentObject = new XMLHttpRequest();
+
+            xmlDocumentObject.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var xmlData = this.responseXML;
+                    displayUserDetails(xmlData);
+                }
+            };
+
+            xmlDocumentObject.open("GET", "userlist.xml", true);
+            xmlDocumentObject.send();
+        }
+
+        function displayUserDetails(xmlData) {
+            var userIdInput = document.getElementById("myText").value.trim();
+            var users = xmlData.getElementsByTagName("user");
+            var found = false;
+
+            for (var i = 0; i < users.length; i++) {
+                var userId = users[i].getElementsByTagName("userid")[0].textContent;
+                
+                if (userId === userIdInput) {
+                    var name = users[i].getElementsByTagName("username")[0].textContent;
+                    var address = users[i].getElementsByTagName("address")[0].textContent;
+                    var phone = users[i].getElementsByTagName("phone")[0].textContent;
+                    var email = users[i].getElementsByTagName("email")[0].textContent;
+
+                    document.getElementById("displayDIV").innerHTML = `
+                        <b>User ID:</b> ${userId} <br>
+                        <b>Name:</b> ${name} <br>
+                        <b>Address:</b> ${address} <br>
+                        <b>Phone:</b> ${phone} <br>
+                        <b>Email:</b> ${email}
+                    `;
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found) {
+                document.getElementById("displayDIV").innerHTML = "User not found!";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Search User</h1>
+    <input type="text" id="myText" placeholder="Enter User ID">
+    <input type="button" value="Get User Details" onclick="readXMLData()">
+    <p>
+    <div id="displayDIV"></div>
+</body>
+</html>

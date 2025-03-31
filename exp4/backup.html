@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+    <script>
+        function validateLogin(event) {
+            event.preventDefault(); // Prevents form from refreshing the page
+
+            let username = document.getElementById("username").value;
+            let password = document.getElementById("password").value;
+
+            if (username === "" || password === "") {
+                alert("All fields must be filled out");
+                return false;
+            }
+
+            if (password.length < 6) {
+                alert("Password must be at least 6 characters long");
+                return false;
+            }
+
+            // Hardcoded credentials for demo (Replace this with session/local storage if needed)
+            if (username === "user" && password === "password") {
+                document.getElementById("result").innerHTML = `<h2>Welcome, ${username}!</h2>`;
+            } else {
+                document.getElementById("result").innerHTML = `
+                    <h2>Login Failed! Incorrect username or password.</h2>
+                    <a href="registration.html">Click here to Register</a>
+                `;
+            }
+        }
+    </script>
+</head>
+<body bgcolor="#e600e6">
+    <center>
+        <h1><u>Login Page</u></h1>
+        <form onsubmit="validateLogin(event)">
+            <h2>
+                Username: <input type="text" id="username"/> <br><br>
+                Password: <input type="password" id="password"/> <br><br>
+                <input type="submit" value="Login"/>
+            </h2>
+        </form>
+        <div id="result"></div>
+    </center>
+</body>
+</html>

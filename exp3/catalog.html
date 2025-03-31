@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Books Catalog</title>
+    <style>
+        body {
+            background-color: #ffc0cb;
+            font-family: Arial, sans-serif;
+        }
+        h2 {
+            color: #ff69b4;
+        }
+        .search-box {
+            margin: 20px;
+        }
+        input[type="text"] {
+            padding: 8px;
+            margin: 5px;
+            font-size: 16px;
+        }
+        input[type="button"], input[type="reset"] {
+            padding: 8px 16px;
+            margin: 5px;
+            font-size: 16px;
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="button"]:hover, input[type="reset"]:hover {
+            background-color: #ff1493;
+        }
+    </style>
+</head>
+<body>
+    <h2 align="center">Book Catalog</h2>
+    <div class="search-box" align="center">
+        <p>Book Title: <input type="text" name="title" placeholder="Enter book title"></p>
+        <input type="button" value="Search">
+        <input type="reset" value="Clear">
+    </div>
+</body>
+</html>

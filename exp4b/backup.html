@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <script>
+        function showNextForm(event) {
+            event.preventDefault(); // Prevent form submission
+
+            let name = document.getElementById("name").value;
+            let password = document.getElementById("password").value;
+            let profession = document.getElementById("profession").value;
+
+            if (!name || !password) {
+                alert("Please fill in all required fields.");
+                return;
+            }
+
+            // Store data in session storage
+            sessionStorage.setItem("name", name);
+            sessionStorage.setItem("password", password);
+            sessionStorage.setItem("profession", profession);
+
+            // Hide the first form and show the second form
+            document.getElementById("form1").style.display = "none";
+            document.getElementById("form2").style.display = "block";
+        }
+
+        function completeRegistration(event) {
+            event.preventDefault();
+
+            let email = document.getElementById("email").value;
+            let phone = document.getElementById("phone").value;
+
+            if (!email || !phone) {
+                alert("Please fill in all required fields.");
+                return;
+            }
+
+            let name = sessionStorage.getItem("name");
+            let password = sessionStorage.getItem("password");
+            let profession = sessionStorage.getItem("profession");
+
+            document.getElementById("form2").style.display = "none";
+
+            document.getElementById("result").innerHTML = `
+                <h1>Registration Successful!</h1>
+                <h2>Here are your details:</h2>
+                <table border="1" cellpadding="5" cellspacing="0">
+                    <tr><td><b>Name:</b></td><td>${name}</td></tr>
+                    <tr><td><b>Password:</b></td><td>${password}</td></tr>
+                    <tr><td><b>Profession:</b></td><td>${profession}</td></tr>
+                    <tr><td><b>Email:</b></td><td>${email}</td></tr>
+                    <tr><td><b>Phone:</b></td><td>${phone}</td></tr>
+                </table>
+                <br><br><a href="index.html">Go to Home</a>
+            `;
+        }
+    </script>
+</head>
+<body bgcolor="cyan">
+    <center>
+        <h1>WELCOME TO REGISTRATION PAGE</h1>
+
+        <!-- First Registration Form -->
+        <form id="form1" onsubmit="showNextForm(event)">
+            <b>Name:</b> <input type="text" id="name" required><br><br>
+            <b>Password:</b> <input type="password" id="password" required><br><br>
+            <b>PROFESSION:</b>
+            <select id="profession">
+                <option value="engineer">ENGINEER</option>
+                <option value="teacher">TEACHER</option>
+                <option value="businessman">BUSINESSMAN</option>
+            </select><br><br>
+            <input type="submit" value="Next">
+        </form>
+
+        <!-- Second Form for Email & Phone -->
+        <form id="form2" onsubmit="completeRegistration(event)" style="display:none;">
+            <b>EMAIL ID:</b> <input type="email" id="email" required><br><br>
+            <b>PHONE NO:</b> <input type="text" id="phone" required><br><br>
+            <input type="submit" value="Register Now">
+        </form>
+
+        <div id="result"></div>
+    </center>
+</body>
+</html>

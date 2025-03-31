@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Online Examination</title>
+    <script>
+        function calculateScore(event) {
+            event.preventDefault(); // Prevent form submission
+
+            let score = 0;
+
+            if (document.querySelector('input[name="group1"]:checked')?.value === "True") score += 2;
+            if (document.querySelector('input[name="group2"]:checked')?.value === "False") score += 2;
+            if (document.querySelector('input[name="group3"]:checked')?.value === "True") score += 2;
+            if (document.querySelector('input[name="group4"]:checked')?.value === "False") score += 2;
+            if (document.querySelector('input[name="group5"]:checked')?.value === "False") score += 2;
+
+            document.getElementById("result").innerHTML = `<h2>Your Score: ${score} / 10</h2>`;
+        }
+    </script>
+</head>
+<body>
+        <h1>Online Examination</h1>
+        <form onsubmit="calculateScore(event)">
+            <b>Seat Number:</b> <input type="text" name="Seat_no" required><br><br>
+            <b>Name:</b> <input type="text" name="Name" required><br><br>
+
+            <b>1. Does every host implement the transport layer?</b><br>
+            <input type="radio" name="group1" value="True"> True
+            <input type="radio" name="group1" value="False"> False<br><br>
+
+            <b>2. Is the network layer responsible for data transmission?</b><br>
+            <input type="radio" name="group2" value="True"> True
+            <input type="radio" name="group2" value="False"> False<br><br>
+
+            <b>3. Does packet switching improve network efficiency?</b><br>
+            <input type="radio" name="group3" value="True"> True
+            <input type="radio" name="group3" value="False"> False<br><br>
+
+            <b>4. Do phone networks use packet switching?</b><br>
+            <input type="radio" name="group4" value="True"> True
+            <input type="radio" name="group4" value="False"> False<br><br>
+
+            <b>5. Is HTML a protocol?</b><br>
+            <input type="radio" name="group5" value="True"> True
+            <input type="radio" name="group5" value="False"> False<br><br>
+
+            <input type="submit" value="Submit">
+        </form>
+
+        <div id="result"></div>
+</body>
+</html>
